@@ -1,30 +1,37 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { ButtonForm, InputForm } from './SearchBox.styled';
 
-const SearchBox = ({ onSubmit }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+export const SearchBox = ({ onSubmit }) => {
+  const [query, setQuery] = useState('');
 
-  function handleSubmit(e) {
+  const handleChange = e => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(searchQuery);
-    setSearchQuery('');
-  }
+    if (!query) {
+      toast.error("Sorry, the search string can't be empty. Please try again.");
+      return;
+    }
+    onSubmit(query);
+    setQuery('');
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
-          name="search"
+        <InputForm
+          name="query"
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search movie"
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-        ></input>
-        <button type="submit">Search</button>
+          onChange={handleChange}
+        ></InputForm>
+        <ButtonForm type="submit">Search</ButtonForm>
       </form>
     </div>
   );
 };
-
-export default SearchBox;
