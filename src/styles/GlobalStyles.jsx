@@ -31,7 +31,6 @@ export const GlobalStyles = css`
 
   ul,
   ol {
-    list-style: none;
     padding-left: 0;
     margin: 0;
   }
@@ -46,7 +45,6 @@ export const GlobalStyles = css`
   }
 
   a {
-    text-decoration: none;
     color: inherit;
   }
 

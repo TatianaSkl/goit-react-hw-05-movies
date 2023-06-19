@@ -1,61 +1,51 @@
-import Loader from 'components/Loader/Loader';
-import SearchBox from 'components/SearchBox/SearchBox';
+import { Loader } from 'components/Loader/Loader';
+import { MoviesList } from 'components/MoviesList/MoviesList';
+import { SearchBox } from 'components/SearchBox/SearchBox';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { getSearchMovies } from 'service/movies-api';
 
-const Movies = () => {
+export const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('search') ?? '';
 
-  function handlerQuery(searchQuery) {
-    if (searchQuery.trim() === '') {
-      toast.error("Sorry, the search string can't be empty. Please try again.");
-      return;
-    }
-    searchQuery ? setSearchParams({ search: searchQuery }) : setSearchParams({});
-  }
   useEffect(() => {
+    const query = searchParams.get('query') ?? '';
     if (!query) {
       return;
     }
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const data = await getSearchMovies({ query });
-        if (data.results.length === 0) {
-          throw new Error(`Sorry, no movie from ${query}!`);
+    setIsLoading(true);
+    getSearchMovies({ query })
+      .then(response => {
+        if (response.results.length === 0) {
+          toast.error(`Sorry, no movie from ${query}!`);
+        } else {
+          setMovies(response.results);
         }
-        setMovies(data.results);
-      } catch (error) {
+      })
+      .catch(error => {
         setError(error.message);
+      })
+      .finally(() => {
         setIsLoading(false);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [query]);
+      });
+  }, [searchParams]);
+
+  const handleSubmit = query => {
+    setSearchParams({ query });
+    setMovies([]);
+  };
 
   return (
     <main>
       <ToastContainer autoClose={3000} />
-      <SearchBox onSubmit={handlerQuery} />
-      <>
-        {isLoading && <Loader />}
-        <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>{movie.title}</li>
-          ))}
-        </ul>
-        {error && <h2>{error}</h2>}
-      </>
+      <SearchBox onSubmit={handleSubmit} />
+      {isLoading && <Loader />}
+      <MoviesList movies={movies} />
+      {error && <h2>{error}</h2>}
     </main>
   );
 };
-
-export default Movies;

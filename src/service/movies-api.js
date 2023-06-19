@@ -25,7 +25,7 @@ export async function getMovieDetails(movieId) {
     throw new Error(`Smth went wrong...`);
   }
 }
-export async function getMovieCredits(movieId) {
+export async function getMovieCast(movieId) {
   const response = await fetch(`${BASE_URL}movie/${movieId}/credits?api_key=${API_KEY}`);
   if (response.ok) {
     return response.json();
@@ -38,6 +38,6 @@ export async function getMovieReviews(movieId) {
   if (response.ok) {
     return response.json();
   } else {
-    throw new Error(`We don't have any reviews for this movie.`);
+    throw new Error(`Smth went wrong...`);
   }
 }

@@ -1,39 +1,54 @@
 import styled from '@emotion/styled';
-import { NavLink } from 'react-router-dom';
 
-export const Container = styled.div`
-  max-width: 1200px;
+export const Section = styled.section`
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  &:after {
+    display: block;
+    content: '';
 
-  padding-left: ${props => props.theme.spacing(5)};
-  padding-right: ${props => props.theme.spacing(5)};
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
 
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-export const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0;
-  margin-bottom: 16px;
-  border-bottom: 1px solid black;
-
-  > nav {
-    display: flex;
+    width: 100%;
+    height: 1px;
+    border-radius: 1px;
+    background-color: ${props => props.theme.colors.dark};
   }
 `;
 
-export const Link = styled(NavLink)`
-  padding: 8px 16px;
+export const Button = styled.div`
+  padding: 6px;
   border-radius: 4px;
-  text-decoration: none;
-  color: black;
-  font-weight: 500;
+  width: 120px;
+  margin-bottom: 20px;
+  box-shadow: ${props => props.theme.shadows.medium};
+  color: ${props => props.theme.colors.white};
+  transition-property: transform, box-shadow, background-color;
+  transition-duration: 0.25s;
+  transition-timing-function: ${props => props.theme.animation.cubicBezier};
 
-  &.active {
-    color: white;
-    background-color: orangered;
+  background-color: ${props => props.theme.colors.blue};
+  font-weight: 600;
+  & a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  & svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 2px 10px 2px ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.yellow};
+    background-color: ${props => props.theme.colors.white};
   }
 `;
