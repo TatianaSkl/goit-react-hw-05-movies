@@ -17,7 +17,6 @@ export const SearchBox = ({ onSubmit }) => {
       return;
     }
     onSubmit(query);
-    setQuery('');
   };
 
   return (
