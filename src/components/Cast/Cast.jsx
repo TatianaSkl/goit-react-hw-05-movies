@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Section } from 'components/App/App.styled';
 import { Loader } from 'components/Loader/Loader';
+import { Section } from 'components/App/App.styled';
 import { Text } from 'components/MoviesInfo/MoviesInfo.styled';
 
 import { getMovieCast } from 'service/movies-api';
@@ -61,7 +61,7 @@ export const Cast = () => {
           );
         })}
       </ul>
-      {castInfo.length === 0 && <Section>We don't have any cast for this movie.</Section>}
+      {castInfo.length === 0 && <div>We don't have any cast for this movie.</div>}
       {error && <h2>{error}</h2>}
     </Section>
   );

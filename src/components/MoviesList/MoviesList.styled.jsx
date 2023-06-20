@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const Item = styled.li`
   width: max-content;
+  white-space: nowrap;
   font-style: italic;
   &:not(:last-child) {
     margin-bottom: 5px;

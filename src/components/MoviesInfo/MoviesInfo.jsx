@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Image, ItemInfo, Section, Text, Title, Wrapper } from './MoviesInfo.styled';
 
 export const MoviesInfo = ({
@@ -39,4 +40,17 @@ export const MoviesInfo = ({
       </Wrapper>
     </Section>
   );
+};
+MoviesInfo.propTypes = {
+  title: PropTypes.string.isRequired,
+  release_date: PropTypes.string.isRequired,
+  overview: PropTypes.string.isRequired,
+  vote_average: PropTypes.number.isRequired,
+  genres: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  poster_path: PropTypes.string,
 };

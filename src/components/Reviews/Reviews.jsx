@@ -1,8 +1,9 @@
-import { Section } from 'components/App/App.styled';
-import { Loader } from 'components/Loader/Loader';
-import { Text } from 'components/MoviesInfo/MoviesInfo.styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Loader } from 'components/Loader/Loader';
+import { Section } from 'components/App/App.styled';
+import { Text } from 'components/MoviesInfo/MoviesInfo.styled';
+
 import { getMovieReviews } from 'service/movies-api';
 
 export const Reviews = () => {
@@ -40,7 +41,7 @@ export const Reviews = () => {
           </li>
         ))}
       </ul>
-      {reviewsInfo.length === 0 && <Section>We don't have any reviews for this movie.</Section>}
+      {reviewsInfo.length === 0 && <div>We don't have any reviews for this movie.</div>}
       {error && <h2>{error}</h2>}
     </Section>
   );

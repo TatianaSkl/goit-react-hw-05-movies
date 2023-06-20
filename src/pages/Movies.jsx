@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { SearchBox } from 'components/SearchBox/SearchBox';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+
 import { getSearchMovies } from 'service/movies-api';
 
 export const Movies = () => {
@@ -35,7 +36,8 @@ export const Movies = () => {
   }, [searchParams]);
 
   const handleSubmit = query => {
-    setSearchParams({ query });
+    const nextParams = query !== '' ? { query } : {};
+    setSearchParams(nextParams);
     setMovies([]);
   };
 

@@ -1,12 +1,13 @@
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Loader } from 'components/Loader/Loader';
 import { MoviesInfo } from 'components/MoviesInfo/MoviesInfo';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { getMovieDetails } from 'service/movies-api';
 import { Button, Section } from 'components/App/App.styled';
 import { Item } from 'components/MoviesList/MoviesList.styled';
 import { Text } from 'components/MoviesInfo/MoviesInfo.styled';
+
+import { getMovieDetails } from 'service/movies-api';
 
 export const MovieDetails = () => {
   const [movieInfo, setMovieInfo] = useState(null);
@@ -42,7 +43,7 @@ export const MovieDetails = () => {
           Go back
         </Link>
       </Button>
-      <MoviesInfo {...movieInfo} />
+      {movieInfo && <MoviesInfo {...movieInfo} />}
       <Section>
         <Text>Additional information</Text>
         <ul>
