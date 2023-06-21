@@ -11,6 +11,7 @@ export const Cast = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
+  const defaultImg = 'https://img.freepik.com/free-vector/cinema-concept_1284-12759.jpg?w=2000';
 
   useEffect(() => {
     if (!movieId) {
@@ -35,23 +36,13 @@ export const Cast = () => {
         {castInfo?.map(({ id, character, name, profile_path }) => {
           return (
             <li key={id}>
-              {profile_path ? (
-                <img
-                  src={'https://image.tmdb.org/t/p/w500' + profile_path}
-                  alt={name}
-                  width={100}
-                  loading="lazy"
-                  style={{ marginBottom: '20px' }}
-                />
-              ) : (
-                <img
-                  src="https://img.freepik.com/free-vector/cinema-concept_1284-12759.jpg?w=2000"
-                  alt="no foto"
-                  width={100}
-                  loading="lazy"
-                  style={{ marginBottom: '20px' }}
-                />
-              )}
+              <img
+                src={profile_path ? 'https://image.tmdb.org/t/p/w500' + profile_path : defaultImg}
+                alt={name}
+                width={100}
+                loading="lazy"
+                style={{ marginBottom: '20px' }}
+              />
               <Text>{name}</Text>
               <Text>
                 <i>Character: </i>

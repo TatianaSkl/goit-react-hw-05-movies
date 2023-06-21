@@ -10,17 +10,14 @@ export const MoviesInfo = ({
   poster_path,
 }) => {
   const data = new Date(release_date).getFullYear();
+  const defaultImg = 'https://img.freepik.com/free-vector/cinema-concept_1284-12759.jpg?w=2000';
   return (
     <Section>
-      {poster_path ? (
-        <Image src={'https://image.tmdb.org/t/p/w500' + poster_path} alt="poster" loading="lazy" />
-      ) : (
-        <Image
-          src="https://img.freepik.com/free-vector/cinema-concept_1284-12759.jpg?w=2000"
-          alt="no poster"
-          loading="lazy"
-        />
-      )}
+      <Image
+        src={poster_path ? 'https://image.tmdb.org/t/p/w500' + poster_path : defaultImg}
+        alt="poster"
+        loading="lazy"
+      />
       <Wrapper>
         <h2 style={{ marginBottom: '20px' }}>
           {title} ({data})
